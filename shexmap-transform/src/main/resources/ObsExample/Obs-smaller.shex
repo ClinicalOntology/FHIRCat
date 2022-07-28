@@ -79,9 +79,6 @@ start=@<Observation> AND {fhir:nodeRole [fhir:treeRoot]}
 }
 
 <canonical> CLOSED { # @@
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations
   fhir:link IRI ? ;
     fhir:value @<string>?;                  # Primitive value for canonical
     fhir:index xsd:integer?                 # Relative position in a list
@@ -112,34 +109,41 @@ fhirvs:observation-status ["registered" "preliminary" "final" "amended" "correct
 }
 
 <dateTime> CLOSED {
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
     fhir:value @<dateTime>?;                # Primitive value for dateTime
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
 <instant> CLOSED { # @@
-    fhir:Element.id @<string>?;             # xml:id (or equivalent in JSON)
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
     fhir:value @<instant>?;                 # Primitive value for instant
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
-<Quantity> CLOSED {
-    fhir:Element.id @<string>?;             # Unique id for inter-element 
-                                            # referencing 
-    fhir:Element.extension @<Extension>*;   # Additional content defined by 
-                                            # implementations 
+<string> CLOSED { # @@
+    fhir:value @<string>?;                  # Primitive value for string
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+<Quantity> CLOSED { # @@
     fhir:Quantity.value @<decimal>?;        # Numerical value (with implicit 
                                             # precision) 
-    fhir:Quantity.comparator @<code> AND
-    	{fhir:value @fhirvs:quantity-comparator}?;  # < | <= | >= | > | ad - how to 
-                                            # understand the value 
     fhir:Quantity.unit @<string>?;          # Unit representation
     fhir:Quantity.system @<uri>?;           # System that defines coded unit form
     fhir:Quantity.code @<code>?;            # Coded form of the unit
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+<Attachment> CLOSED { # @@
+    fhir:Attachment.language @<code>?;      # Human language of the content 
+                                            # (BCP-47) 
+    fhir:Attachment.url @<url>?;            # Uri where the data can be found
+                                            # provided) 
+    fhir:Attachment.title @<string>?;       # Label to display in place of the 
+                                            # data 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+<uri> CLOSED { # @@
+    fhir:value @<uri>?;                     # Primitive value for uri
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
@@ -150,6 +154,20 @@ fhirvs:observation-status ["registered" "preliminary" "final" "amended" "correct
                                             # system 
     fhir:Coding.display @<string>?;         # Representation defined by the 
                                             # system 
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+fhirvs:narrative-status ["generated" "extensions" "additional" "empty"]
+
+<decimal> CLOSED {
+    fhir:value @<decimal>?;                 # Primitive value for decimal
+    fhir:index xsd:integer?                 # Relative position in a list
+}
+
+fhirvs:quantity-comparator ["<" "<=" ">=" ">" "ad"]
+
+<url> CLOSED { # @@
+    fhir:value @<string>?;                  # Primitive value for url
     fhir:index xsd:integer?                 # Relative position in a list
 }
 
