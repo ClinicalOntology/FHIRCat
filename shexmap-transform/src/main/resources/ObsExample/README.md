@@ -2,7 +2,10 @@
 
 ``` shell
 git clone https://github.com/shexjs/shex.js
-export PATH=$PATH:$(pwd)/shex.js/packages/shex-cli/bin/validate
+cd $_
+npm ci
+./node_modules/.bin/lerna bootstrap
+export PATH=$PATH:$(pwd)/shex.js/packages/shex-cli/bin
 ```
 
 
