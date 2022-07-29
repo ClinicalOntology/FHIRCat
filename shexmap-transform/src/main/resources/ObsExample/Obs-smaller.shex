@@ -1,9 +1,52 @@
 PREFIX fhir: <http://hl7.org/fhir/> 
 PREFIX fhirvs: <http://hl7.org/fhir/ValueSet/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX sct: <http://snomed.info/id/>
+PREFIX loinc: <http://loinc.org/rdf#>
+PREFIX Map: <http://shex.io/extensions/Map/#>
 BASE <http://hl7.org/fhir/shape/>
 
 start=@<Observation> AND {fhir:nodeRole [fhir:treeRoot]}
+
+<FhirBp> @<Observation> AND {
+    fhir:Observation.component {
+     fhir:Observation.component.code EXTRA fhir:CodeableConcept.coding {
+       fhir:CodeableConcept.coding
+       {
+         a [loinc:8480-6];
+         fhir:Coding.system { fhir:value ["http://loinc.org"] };
+         fhir:Coding.code { fhir:value ["8480-6"] };
+       }
+       /* {
+         a [sct:271649006];
+         fhir:Coding.system { fhir:value ["http://snomed.info/sct"] };
+         fhir:Coding.code { fhir:value ["271649006"] };
+       } */
+      } ;
+      fhir:Observation.component.valueQuantity {
+        fhir:Quantity.value { fhir:value xsd:decimal %Map:{ bp:sysVal %} };
+        fhir:Quantity.unit { fhir:value ["mmHg"] };
+        fhir:Quantity.system { fhir:value ["http://unitsofmeasure.org"] };
+        fhir:Quantity.code { fhir:value ["mm[Hg]"] }
+      }
+    };
+    fhir:Observation.component {
+     fhir:Observation.component.code EXTRA fhir:CodeableConcept.coding {
+       fhir:CodeableConcept.coding
+       {
+         a [loinc:8462-4];
+         fhir:Coding.system { fhir:value ["http://loinc.org"] };
+         fhir:Coding.code { fhir:value ["8462-4"] };
+       }
+      } ;
+      fhir:Observation.component.valueQuantity {
+        fhir:Quantity.value { fhir:value xsd:decimal %Map:{ bp:diaVal %} };
+        fhir:Quantity.unit { fhir:value ["mmHg"] };
+        fhir:Quantity.system { fhir:value ["http://unitsofmeasure.org"] };
+        fhir:Quantity.code { fhir:value ["mm[Hg]"] }
+      }
+    };
+}
 
 
 # Measurements and simple assertions

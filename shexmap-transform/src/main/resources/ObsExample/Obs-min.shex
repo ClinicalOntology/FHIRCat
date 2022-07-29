@@ -7,7 +7,7 @@ PREFIX Map: <http://shex.io/extensions/Map/#>
 PREFIX bp: <http://shex.io/extensions/Map/#BPDAM->
 BASE <http://hl7.org/fhir/shape/>
 
-<BP> {
+<FhirBp> {
     fhir:Observation.component {
      fhir:Observation.component.code EXTRA fhir:CodeableConcept.coding {
        fhir:CodeableConcept.coding
