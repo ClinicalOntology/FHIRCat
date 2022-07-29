@@ -1,3 +1,9 @@
+export PATH=$PATH:[BASE_DIR]/shex.js/packages/shex-cli/bin
+
+In browser, open:
+
+/Users/cnanjo/repository/third\ party/shex.js/packages/extension-map/doc/shexmap-simple.html
+
 # Write Me
 
 ``` shell
