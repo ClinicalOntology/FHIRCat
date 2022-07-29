@@ -1,0 +1,52 @@
+---
+- schemaLabel: BP1
+  schemaURL: Obs-min.shex
+  dataLabel: FHIR observation-example-bloodpressure
+  dataURL: observation-example-bloodpressure.ttl
+  queryMap: "<http://hl7.org/fhir/Observation/blood-pressure>@<BP>"
+  outputSchema: |
+    PREFIX  : <http://dam.example/med#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX bp: <http://shex.io/extensions/Map/#BPDAM->
+    PREFIX Map: <http://shex.io/extensions/Map/#>
+
+    start = @<BPunitsDAM>
+
+    <BPunitsDAM> {
+      :systolic {
+        :value xsd:float %Map:{ bp:sysVal %};
+    #    :units xsd:string %Map:{ bp:sysUnits %}
+      };
+      :diastolic {
+        :value xsd:float %Map:{ bp:diaVal %};
+    #    :units xsd:string %Map:{ bp:diaUnits %}
+      };
+    #  :someConstProp xsd:string? %Map:{ <http://abc.example/someConstant> %}
+    }
+  outputShape: "<BPunitsDAM>"
+  staticVars:
+    http://abc.example/someConstant: '"123-456"'
+  createRoot: "<tag:b0>"
+  status: conformant
+- schemaLabel: BP1
+  schemaURL: Obs-min.shex
+  dataLabel: debug
+  dataURL: observation-example-bloodpressure.ttl
+  queryMap: "<http://hl7.org/fhir/Observation/blood-pressure>@<BP>"
+  outputSchema: |
+    PREFIX  : <http://dam.example/med#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX bp: <http://shex.io/extensions/Map/#BPDAM->
+    PREFIX Map: <http://shex.io/extensions/Map/#>
+
+    start = @<BPunitsDAM>
+
+    <BPunitsDAM> {
+        :sys xsd:float %Map:{ bp:sysVal %};
+        :dia xsd:float %Map:{ bp:diaVal %};
+    }
+  outputShape: "<http://localhost/checkouts/ClinicalOntology/FHIRCat/shexmap-transform/src/main/resources/ObsExample/BPunitsDAM>"
+  staticVars:
+    http://abc.example/someConstant: '"123-456"'
+  createRoot: "<tag:b0>"
+  status: conformant
